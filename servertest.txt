@@ -1,0 +1,1466 @@
+=== RUN   TestCheckConfigFiles
+=== RUN   TestCheckConfigFiles/No_changes
+Your test.toml file structure is outdated.
+Modified parameters:
+  * param1
+  * param2
+test.toml has been updated with the new structure.
+    config_check_test.go:34: 
+        	Error Trace:	/home/cordt/repos/cosmos-sdk-1/server/config_check_test.go:34
+        	Error:      	"param1 = 'different_value'\nparam2 = 100\n" does not contain "value1"
+        	Test:       	TestCheckConfigFiles/No_changes
+=== RUN   TestCheckConfigFiles/Added_parameter
+Your test.toml file structure is outdated.
+Added parameters:
+  + param2
+test.toml has been updated with the new structure.
+=== RUN   TestCheckConfigFiles/Removed_parameter
+Your test.toml file structure is outdated.
+Removed parameters:
+  - param2
+test.toml has been updated with the new structure.
+=== RUN   TestCheckConfigFiles/Nested_structure_changes
+Your test.toml file structure is outdated.
+Added parameters:
+  + parent.child2
+test.toml has been updated with the new structure.
+--- FAIL: TestCheckConfigFiles (0.00s)
+    --- FAIL: TestCheckConfigFiles/No_changes (0.00s)
+    --- PASS: TestCheckConfigFiles/Added_parameter (0.00s)
+    --- PASS: TestCheckConfigFiles/Removed_parameter (0.00s)
+    --- PASS: TestCheckConfigFiles/Nested_structure_changes (0.00s)
+=== RUN   Test_OpenDB
+=== PAUSE Test_OpenDB
+=== RUN   Test_openTraceWriter
+=== PAUSE Test_openTraceWriter
+=== RUN   TestGetPruningOptionsFromFlags
+=== RUN   TestGetPruningOptionsFromFlags/pruning
+=== RUN   TestGetPruningOptionsFromFlags/custom_pruning_options
+=== RUN   TestGetPruningOptionsFromFlags/default
+--- PASS: TestGetPruningOptionsFromFlags (0.00s)
+    --- PASS: TestGetPruningOptionsFromFlags/pruning (0.00s)
+    --- PASS: TestGetPruningOptionsFromFlags/custom_pruning_options (0.00s)
+    --- PASS: TestGetPruningOptionsFromFlags/default (0.00s)
+=== RUN   TestGetAppDBBackend
+--- PASS: TestGetAppDBBackend (0.00s)
+=== RUN   TestInterceptConfigsPreRunHandlerCreatesConfigFilesWhenMissing
+Your config.toml file structure is outdated.
+Added parameters:
+  + API
+  + AppDBBackend
+  + GRPC
+  + HaltHeight
+  + HaltTime
+  + IAVLCacheSize
+  + IAVLDisableFastNode
+  + IndexEvents
+  + InterBlockCache
+  + Mempool
+  + MinGasPrices
+  + MinRetainBlocks
+  + Pruning
+  + PruningInterval
+  + PruningKeepRecent
+  + QueryGasLimit
+  + StateSync
+  + Streaming
+  + Telemetry
+Removed parameters:
+  - abci
+  - blocksync
+  - consensus
+  - db_backend
+  - db_dir
+  - filter_peers
+  - genesis_file
+  - grpc
+  - instrumentation
+  - log_format
+  - log_level
+  - mempool
+  - moniker
+  - node_key_file
+  - p2p
+  - priv_validator_key_file
+  - priv_validator_laddr
+  - priv_validator_state_file
+  - proxy_app
+  - rpc
+  - statesync
+  - storage
+  - tx_index
+  - version
+Do you want to update config.toml with the new structure? (y/n): config.toml was not updated. Please manually update your file structure.
+Your app.toml file structure is outdated.
+Added parameters:
+  + API
+  + AppDBBackend
+  + GRPC
+  + HaltHeight
+  + HaltTime
+  + IAVLCacheSize
+  + IAVLDisableFastNode
+  + IndexEvents
+  + InterBlockCache
+  + Mempool
+  + MinGasPrices
+  + MinRetainBlocks
+  + Pruning
+  + PruningInterval
+  + PruningKeepRecent
+  + QueryGasLimit
+  + StateSync
+  + Streaming
+  + Telemetry
+Removed parameters:
+  - api
+  - app-db-backend
+  - grpc
+  - halt-height
+  - halt-time
+  - iavl-cache-size
+  - iavl-disable-fastnode
+  - index-events
+  - inter-block-cache
+  - mempool
+  - min-retain-blocks
+  - minimum-gas-prices
+  - pruning
+  - pruning-interval
+  - pruning-keep-recent
+  - query-gas-limit
+  - state-sync
+  - streaming
+  - telemetry
+Do you want to update app.toml with the new structure? (y/n): app.toml was not updated. Please manually update your file structure.
+Error: canceled in prerun
+Usage:
+  start [flags]
+
+Flags:
+      --abci string                                     specify abci transport (socket | grpc) (default "socket")
+      --address string                                  Listen address (default "tcp://127.0.0.1:26658")
+      --api.address string                              the API server address to listen on (default "tcp://localhost:1317")
+      --api.enable                                      Define if the API server should be enabled
+      --api.enabled-unsafe-cors                         Define if CORS should be enabled (unsafe - use it at your own risk)
+      --api.max-open-connections uint                   Define the number of maximum open connections (default 1000)
+      --api.rpc-max-body-bytes uint                     Define the CometBFT maximum request body (in bytes) (default 1000000)
+      --api.rpc-read-timeout uint                       Define the CometBFT RPC read timeout (in seconds) (default 10)
+      --api.rpc-write-timeout uint                      Define the CometBFT RPC write timeout (in seconds)
+      --api.swagger                                     Define if swagger documentation should automatically be registered (Note: the API must also be enabled)
+      --consensus.create_empty_blocks                   set this to false to only produce blocks when there are txs or when the AppHash changes (default true)
+      --consensus.create_empty_blocks_interval string   the possible interval between empty blocks (default "0s")
+      --consensus.double_sign_check_height int          how many blocks to look back to check existence of the node's consensus votes before joining consensus
+      --cpu-profile string                              Enable CPU profiling and write to the provided file
+      --db_backend string                               database backend: goleveldb | cleveldb | boltdb | rocksdb | badgerdb | pebbledb (default "goleveldb")
+      --db_dir string                                   database directory (default "data")
+      --genesis_hash bytesHex                           optional SHA-256 hash of the genesis file
+      --grpc-only                                       Start the node in gRPC query only mode (no CometBFT process is started)
+      --grpc.address string                             the gRPC server address to listen on (default "localhost:9090")
+      --grpc.enable                                     Define if the gRPC server should be enabled (default true)
+      --halt-height uint                                Block height at which to gracefully halt the chain and shutdown the node
+      --halt-time uint                                  Minimum block time (in Unix seconds) at which to gracefully halt the chain and shutdown the node
+  -h, --help                                            help for start
+      --home string                                      (default "/foobar")
+      --iavl-disable-fastnode                           Disable fast node for IAVL tree
+      --inter-block-cache                               Enable inter-block caching (default true)
+      --inv-check-period uint                           Assert registered invariants every N blocks
+  -k, --key-type string                                 private key type (one of "ed25519", "secp256k1") (default "ed25519")
+      --mempool.max-txs int                             Sets MaxTx value for the app-side mempool (default -1)
+      --min-retain-blocks uint                          Minimum block height offset during ABCI commit to prune CometBFT blocks
+      --minimum-gas-prices string                       Minimum gas prices to accept for transactions; Any fee in a tx must meet this minimum (e.g. 0.01photino;0.0001stake)
+      --moniker string                                  node name (default "cordt-ms7917")
+      --p2p.external_address string                     ip:port address to advertise to peers for them to dial
+      --p2p.laddr string                                node listen address. (0.0.0.0:0 means any interface, any port) (default "tcp://0.0.0.0:26656")
+      --p2p.persistent_peers string                     comma-delimited ID@host:port persistent peers
+      --p2p.pex                                         enable/disable Peer-Exchange (default true)
+      --p2p.private_peer_ids string                     comma-delimited private peer IDs
+      --p2p.seed_mode                                   enable/disable seed mode
+      --p2p.seeds string                                comma-delimited ID@host:port seed nodes
+      --p2p.unconditional_peer_ids string               comma-delimited IDs of unconditional peers
+      --priv_validator_laddr string                     socket address to listen on for connections from external priv_validator process
+      --proxy_app string                                proxy app address, or one of: 'kvstore', 'persistent_kvstore' or 'noop' for local testing. (default "tcp://127.0.0.1:26658")
+      --pruning string                                  Pruning strategy (default|nothing|everything|custom) (default "default")
+      --pruning-interval uint                           Height interval at which pruned heights are removed from disk (ignored if pruning is not 'custom')
+      --pruning-keep-recent uint                        Number of recent heights to keep on disk (ignored if pruning is not 'custom')
+      --query-gas-limit uint                            Maximum gas a Rest/Grpc query can consume. Blank and 0 imply unbounded.
+      --rpc.laddr string                                RPC listen address. Port required (default "tcp://127.0.0.1:26657")
+      --rpc.pprof_laddr string                          pprof listen address (https://golang.org/pkg/net/http/pprof)
+      --rpc.unsafe                                      enabled unsafe rpc methods
+      --shutdown-grace duration                         On Shutdown, duration to wait for resource clean up
+      --state-sync.snapshot-interval uint               State sync snapshot interval
+      --state-sync.snapshot-keep-recent uint32          State sync snapshot to keep (default 2)
+      --trace                                           Provide full stack traces for errors in ABCI Log
+      --trace-store string                              Enable KVStore tracing to an output file
+      --transport string                                Transport protocol: socket, grpc (default "socket")
+      --unsafe-skip-upgrades ints                       Skip a set of upgrade heights to continue the old binary
+      --with-comet                                      Run abci app embedded in-process with CometBFT (default true)
+
+--- PASS: TestInterceptConfigsPreRunHandlerCreatesConfigFilesWhenMissing (0.00s)
+=== RUN   TestInterceptConfigsPreRunHandlerReadsConfigToml
+Your config.toml file structure is outdated.
+Added parameters:
+  + API
+  + AppDBBackend
+  + GRPC
+  + HaltHeight
+  + HaltTime
+  + IAVLCacheSize
+  + IAVLDisableFastNode
+  + IndexEvents
+  + InterBlockCache
+  + Mempool
+  + MinGasPrices
+  + MinRetainBlocks
+  + Pruning
+  + PruningInterval
+  + PruningKeepRecent
+  + QueryGasLimit
+  + StateSync
+  + Streaming
+  + Telemetry
+Removed parameters:
+  - db_backend
+Do you want to update config.toml with the new structure? (y/n): config.toml was not updated. Please manually update your file structure.
+Your app.toml file structure is outdated.
+Added parameters:
+  + API
+  + AppDBBackend
+  + GRPC
+  + HaltHeight
+  + HaltTime
+  + IAVLCacheSize
+  + IAVLDisableFastNode
+  + IndexEvents
+  + InterBlockCache
+  + Mempool
+  + MinGasPrices
+  + MinRetainBlocks
+  + Pruning
+  + PruningInterval
+  + PruningKeepRecent
+  + QueryGasLimit
+  + StateSync
+  + Streaming
+  + Telemetry
+Removed parameters:
+  - api
+  - app-db-backend
+  - grpc
+  - halt-height
+  - halt-time
+  - iavl-cache-size
+  - iavl-disable-fastnode
+  - index-events
+  - inter-block-cache
+  - mempool
+  - min-retain-blocks
+  - minimum-gas-prices
+  - pruning
+  - pruning-interval
+  - pruning-keep-recent
+  - query-gas-limit
+  - state-sync
+  - streaming
+  - telemetry
+Do you want to update app.toml with the new structure? (y/n): app.toml was not updated. Please manually update your file structure.
+Error: canceled in prerun
+Usage:
+  start [flags]
+
+Flags:
+      --abci string                                     specify abci transport (socket | grpc) (default "socket")
+      --address string                                  Listen address (default "tcp://127.0.0.1:26658")
+      --api.address string                              the API server address to listen on (default "tcp://localhost:1317")
+      --api.enable                                      Define if the API server should be enabled
+      --api.enabled-unsafe-cors                         Define if CORS should be enabled (unsafe - use it at your own risk)
+      --api.max-open-connections uint                   Define the number of maximum open connections (default 1000)
+      --api.rpc-max-body-bytes uint                     Define the CometBFT maximum request body (in bytes) (default 1000000)
+      --api.rpc-read-timeout uint                       Define the CometBFT RPC read timeout (in seconds) (default 10)
+      --api.rpc-write-timeout uint                      Define the CometBFT RPC write timeout (in seconds)
+      --api.swagger                                     Define if swagger documentation should automatically be registered (Note: the API must also be enabled)
+      --consensus.create_empty_blocks                   set this to false to only produce blocks when there are txs or when the AppHash changes (default true)
+      --consensus.create_empty_blocks_interval string   the possible interval between empty blocks (default "0s")
+      --consensus.double_sign_check_height int          how many blocks to look back to check existence of the node's consensus votes before joining consensus
+      --cpu-profile string                              Enable CPU profiling and write to the provided file
+      --db_backend string                               database backend: goleveldb | cleveldb | boltdb | rocksdb | badgerdb | pebbledb (default "goleveldb")
+      --db_dir string                                   database directory (default "data")
+      --genesis_hash bytesHex                           optional SHA-256 hash of the genesis file
+      --grpc-only                                       Start the node in gRPC query only mode (no CometBFT process is started)
+      --grpc.address string                             the gRPC server address to listen on (default "localhost:9090")
+      --grpc.enable                                     Define if the gRPC server should be enabled (default true)
+      --halt-height uint                                Block height at which to gracefully halt the chain and shutdown the node
+      --halt-time uint                                  Minimum block time (in Unix seconds) at which to gracefully halt the chain and shutdown the node
+  -h, --help                                            help for start
+      --home string                                      (default "/foobar")
+      --iavl-disable-fastnode                           Disable fast node for IAVL tree
+      --inter-block-cache                               Enable inter-block caching (default true)
+      --inv-check-period uint                           Assert registered invariants every N blocks
+  -k, --key-type string                                 private key type (one of "ed25519", "secp256k1") (default "ed25519")
+      --mempool.max-txs int                             Sets MaxTx value for the app-side mempool (default -1)
+      --min-retain-blocks uint                          Minimum block height offset during ABCI commit to prune CometBFT blocks
+      --minimum-gas-prices string                       Minimum gas prices to accept for transactions; Any fee in a tx must meet this minimum (e.g. 0.01photino;0.0001stake)
+      --moniker string                                  node name (default "cordt-ms7917")
+      --p2p.external_address string                     ip:port address to advertise to peers for them to dial
+      --p2p.laddr string                                node listen address. (0.0.0.0:0 means any interface, any port) (default "tcp://0.0.0.0:26656")
+      --p2p.persistent_peers string                     comma-delimited ID@host:port persistent peers
+      --p2p.pex                                         enable/disable Peer-Exchange (default true)
+      --p2p.private_peer_ids string                     comma-delimited private peer IDs
+      --p2p.seed_mode                                   enable/disable seed mode
+      --p2p.seeds string                                comma-delimited ID@host:port seed nodes
+      --p2p.unconditional_peer_ids string               comma-delimited IDs of unconditional peers
+      --priv_validator_laddr string                     socket address to listen on for connections from external priv_validator process
+      --proxy_app string                                proxy app address, or one of: 'kvstore', 'persistent_kvstore' or 'noop' for local testing. (default "tcp://127.0.0.1:26658")
+      --pruning string                                  Pruning strategy (default|nothing|everything|custom) (default "default")
+      --pruning-interval uint                           Height interval at which pruned heights are removed from disk (ignored if pruning is not 'custom')
+      --pruning-keep-recent uint                        Number of recent heights to keep on disk (ignored if pruning is not 'custom')
+      --query-gas-limit uint                            Maximum gas a Rest/Grpc query can consume. Blank and 0 imply unbounded.
+      --rpc.laddr string                                RPC listen address. Port required (default "tcp://127.0.0.1:26657")
+      --rpc.pprof_laddr string                          pprof listen address (https://golang.org/pkg/net/http/pprof)
+      --rpc.unsafe                                      enabled unsafe rpc methods
+      --shutdown-grace duration                         On Shutdown, duration to wait for resource clean up
+      --state-sync.snapshot-interval uint               State sync snapshot interval
+      --state-sync.snapshot-keep-recent uint32          State sync snapshot to keep (default 2)
+      --trace                                           Provide full stack traces for errors in ABCI Log
+      --trace-store string                              Enable KVStore tracing to an output file
+      --transport string                                Transport protocol: socket, grpc (default "socket")
+      --unsafe-skip-upgrades ints                       Skip a set of upgrade heights to continue the old binary
+      --with-comet                                      Run abci app embedded in-process with CometBFT (default true)
+
+--- PASS: TestInterceptConfigsPreRunHandlerReadsConfigToml (0.00s)
+=== RUN   TestInterceptConfigsPreRunHandlerReadsAppToml
+Your config.toml file structure is outdated.
+Added parameters:
+  + API
+  + AppDBBackend
+  + GRPC
+  + HaltHeight
+  + HaltTime
+  + IAVLCacheSize
+  + IAVLDisableFastNode
+  + IndexEvents
+  + InterBlockCache
+  + Mempool
+  + MinGasPrices
+  + MinRetainBlocks
+  + Pruning
+  + PruningInterval
+  + PruningKeepRecent
+  + QueryGasLimit
+  + StateSync
+  + Streaming
+  + Telemetry
+Removed parameters:
+  - abci
+  - blocksync
+  - consensus
+  - db_backend
+  - db_dir
+  - filter_peers
+  - genesis_file
+  - grpc
+  - instrumentation
+  - log_format
+  - log_level
+  - mempool
+  - moniker
+  - node_key_file
+  - p2p
+  - priv_validator_key_file
+  - priv_validator_laddr
+  - priv_validator_state_file
+  - proxy_app
+  - rpc
+  - statesync
+  - storage
+  - tx_index
+  - version
+Do you want to update config.toml with the new structure? (y/n): config.toml was not updated. Please manually update your file structure.
+Your app.toml file structure is outdated.
+Added parameters:
+  + API
+  + AppDBBackend
+  + GRPC
+  + HaltHeight
+  + HaltTime
+  + IAVLCacheSize
+  + IAVLDisableFastNode
+  + IndexEvents
+  + InterBlockCache
+  + Mempool
+  + MinGasPrices
+  + MinRetainBlocks
+  + Pruning
+  + PruningInterval
+  + PruningKeepRecent
+  + QueryGasLimit
+  + StateSync
+  + Streaming
+  + Telemetry
+Removed parameters:
+  - halt-time
+Do you want to update app.toml with the new structure? (y/n): app.toml was not updated. Please manually update your file structure.
+Error: canceled in prerun
+Usage:
+  start [flags]
+
+Flags:
+      --abci string                                     specify abci transport (socket | grpc) (default "socket")
+      --address string                                  Listen address (default "tcp://127.0.0.1:26658")
+      --api.address string                              the API server address to listen on (default "tcp://localhost:1317")
+      --api.enable                                      Define if the API server should be enabled
+      --api.enabled-unsafe-cors                         Define if CORS should be enabled (unsafe - use it at your own risk)
+      --api.max-open-connections uint                   Define the number of maximum open connections (default 1000)
+      --api.rpc-max-body-bytes uint                     Define the CometBFT maximum request body (in bytes) (default 1000000)
+      --api.rpc-read-timeout uint                       Define the CometBFT RPC read timeout (in seconds) (default 10)
+      --api.rpc-write-timeout uint                      Define the CometBFT RPC write timeout (in seconds)
+      --api.swagger                                     Define if swagger documentation should automatically be registered (Note: the API must also be enabled)
+      --consensus.create_empty_blocks                   set this to false to only produce blocks when there are txs or when the AppHash changes (default true)
+      --consensus.create_empty_blocks_interval string   the possible interval between empty blocks (default "0s")
+      --consensus.double_sign_check_height int          how many blocks to look back to check existence of the node's consensus votes before joining consensus
+      --cpu-profile string                              Enable CPU profiling and write to the provided file
+      --db_backend string                               database backend: goleveldb | cleveldb | boltdb | rocksdb | badgerdb | pebbledb (default "goleveldb")
+      --db_dir string                                   database directory (default "data")
+      --genesis_hash bytesHex                           optional SHA-256 hash of the genesis file
+      --grpc-only                                       Start the node in gRPC query only mode (no CometBFT process is started)
+      --grpc.address string                             the gRPC server address to listen on (default "localhost:9090")
+      --grpc.enable                                     Define if the gRPC server should be enabled (default true)
+      --halt-height uint                                Block height at which to gracefully halt the chain and shutdown the node
+      --halt-time uint                                  Minimum block time (in Unix seconds) at which to gracefully halt the chain and shutdown the node
+  -h, --help                                            help for start
+      --home string                                      (default "/tmp/TestInterceptConfigsPreRunHandlerReadsAppToml896091086/001")
+      --iavl-disable-fastnode                           Disable fast node for IAVL tree
+      --inter-block-cache                               Enable inter-block caching (default true)
+      --inv-check-period uint                           Assert registered invariants every N blocks
+  -k, --key-type string                                 private key type (one of "ed25519", "secp256k1") (default "ed25519")
+      --mempool.max-txs int                             Sets MaxTx value for the app-side mempool (default -1)
+      --min-retain-blocks uint                          Minimum block height offset during ABCI commit to prune CometBFT blocks
+      --minimum-gas-prices string                       Minimum gas prices to accept for transactions; Any fee in a tx must meet this minimum (e.g. 0.01photino;0.0001stake)
+      --moniker string                                  node name (default "cordt-ms7917")
+      --p2p.external_address string                     ip:port address to advertise to peers for them to dial
+      --p2p.laddr string                                node listen address. (0.0.0.0:0 means any interface, any port) (default "tcp://0.0.0.0:26656")
+      --p2p.persistent_peers string                     comma-delimited ID@host:port persistent peers
+      --p2p.pex                                         enable/disable Peer-Exchange (default true)
+      --p2p.private_peer_ids string                     comma-delimited private peer IDs
+      --p2p.seed_mode                                   enable/disable seed mode
+      --p2p.seeds string                                comma-delimited ID@host:port seed nodes
+      --p2p.unconditional_peer_ids string               comma-delimited IDs of unconditional peers
+      --priv_validator_laddr string                     socket address to listen on for connections from external priv_validator process
+      --proxy_app string                                proxy app address, or one of: 'kvstore', 'persistent_kvstore' or 'noop' for local testing. (default "tcp://127.0.0.1:26658")
+      --pruning string                                  Pruning strategy (default|nothing|everything|custom) (default "default")
+      --pruning-interval uint                           Height interval at which pruned heights are removed from disk (ignored if pruning is not 'custom')
+      --pruning-keep-recent uint                        Number of recent heights to keep on disk (ignored if pruning is not 'custom')
+      --query-gas-limit uint                            Maximum gas a Rest/Grpc query can consume. Blank and 0 imply unbounded.
+      --rpc.laddr string                                RPC listen address. Port required (default "tcp://127.0.0.1:26657")
+      --rpc.pprof_laddr string                          pprof listen address (https://golang.org/pkg/net/http/pprof)
+      --rpc.unsafe                                      enabled unsafe rpc methods
+      --shutdown-grace duration                         On Shutdown, duration to wait for resource clean up
+      --state-sync.snapshot-interval uint               State sync snapshot interval
+      --state-sync.snapshot-keep-recent uint32          State sync snapshot to keep (default 2)
+      --trace                                           Provide full stack traces for errors in ABCI Log
+      --trace-store string                              Enable KVStore tracing to an output file
+      --transport string                                Transport protocol: socket, grpc (default "socket")
+      --unsafe-skip-upgrades ints                       Skip a set of upgrade heights to continue the old binary
+      --with-comet                                      Run abci app embedded in-process with CometBFT (default true)
+
+--- PASS: TestInterceptConfigsPreRunHandlerReadsAppToml (0.00s)
+=== RUN   TestInterceptConfigsPreRunHandlerReadsFlags
+Your config.toml file structure is outdated.
+Added parameters:
+  + API
+  + AppDBBackend
+  + GRPC
+  + HaltHeight
+  + HaltTime
+  + IAVLCacheSize
+  + IAVLDisableFastNode
+  + IndexEvents
+  + InterBlockCache
+  + Mempool
+  + MinGasPrices
+  + MinRetainBlocks
+  + Pruning
+  + PruningInterval
+  + PruningKeepRecent
+  + QueryGasLimit
+  + StateSync
+  + Streaming
+  + Telemetry
+Removed parameters:
+  - abci
+  - blocksync
+  - consensus
+  - db_backend
+  - db_dir
+  - filter_peers
+  - genesis_file
+  - grpc
+  - instrumentation
+  - log_format
+  - log_level
+  - mempool
+  - moniker
+  - node_key_file
+  - p2p
+  - priv_validator_key_file
+  - priv_validator_laddr
+  - priv_validator_state_file
+  - proxy_app
+  - rpc
+  - statesync
+  - storage
+  - tx_index
+  - version
+Do you want to update config.toml with the new structure? (y/n): config.toml was not updated. Please manually update your file structure.
+Your app.toml file structure is outdated.
+Added parameters:
+  + API
+  + AppDBBackend
+  + GRPC
+  + HaltHeight
+  + HaltTime
+  + IAVLCacheSize
+  + IAVLDisableFastNode
+  + IndexEvents
+  + InterBlockCache
+  + Mempool
+  + MinGasPrices
+  + MinRetainBlocks
+  + Pruning
+  + PruningInterval
+  + PruningKeepRecent
+  + QueryGasLimit
+  + StateSync
+  + Streaming
+  + Telemetry
+Removed parameters:
+  - api
+  - app-db-backend
+  - grpc
+  - halt-height
+  - halt-time
+  - iavl-cache-size
+  - iavl-disable-fastnode
+  - index-events
+  - inter-block-cache
+  - mempool
+  - min-retain-blocks
+  - minimum-gas-prices
+  - pruning
+  - pruning-interval
+  - pruning-keep-recent
+  - query-gas-limit
+  - state-sync
+  - streaming
+  - telemetry
+Do you want to update app.toml with the new structure? (y/n): app.toml was not updated. Please manually update your file structure.
+Error: canceled in prerun
+Usage:
+  start [flags]
+
+Flags:
+      --abci string                                     specify abci transport (socket | grpc) (default "socket")
+      --address string                                  Listen address (default "tcp://127.0.0.1:26658")
+      --api.address string                              the API server address to listen on (default "tcp://localhost:1317")
+      --api.enable                                      Define if the API server should be enabled
+      --api.enabled-unsafe-cors                         Define if CORS should be enabled (unsafe - use it at your own risk)
+      --api.max-open-connections uint                   Define the number of maximum open connections (default 1000)
+      --api.rpc-max-body-bytes uint                     Define the CometBFT maximum request body (in bytes) (default 1000000)
+      --api.rpc-read-timeout uint                       Define the CometBFT RPC read timeout (in seconds) (default 10)
+      --api.rpc-write-timeout uint                      Define the CometBFT RPC write timeout (in seconds)
+      --api.swagger                                     Define if swagger documentation should automatically be registered (Note: the API must also be enabled)
+      --consensus.create_empty_blocks                   set this to false to only produce blocks when there are txs or when the AppHash changes (default true)
+      --consensus.create_empty_blocks_interval string   the possible interval between empty blocks (default "0s")
+      --consensus.double_sign_check_height int          how many blocks to look back to check existence of the node's consensus votes before joining consensus
+      --cpu-profile string                              Enable CPU profiling and write to the provided file
+      --db_backend string                               database backend: goleveldb | cleveldb | boltdb | rocksdb | badgerdb | pebbledb (default "goleveldb")
+      --db_dir string                                   database directory (default "data")
+      --genesis_hash bytesHex                           optional SHA-256 hash of the genesis file
+      --grpc-only                                       Start the node in gRPC query only mode (no CometBFT process is started)
+      --grpc.address string                             the gRPC server address to listen on (default "localhost:9090")
+      --grpc.enable                                     Define if the gRPC server should be enabled (default true)
+      --halt-height uint                                Block height at which to gracefully halt the chain and shutdown the node
+      --halt-time uint                                  Minimum block time (in Unix seconds) at which to gracefully halt the chain and shutdown the node
+  -h, --help                                            help for start
+      --home string                                      (default "/foobar")
+      --iavl-disable-fastnode                           Disable fast node for IAVL tree
+      --inter-block-cache                               Enable inter-block caching (default true)
+      --inv-check-period uint                           Assert registered invariants every N blocks
+  -k, --key-type string                                 private key type (one of "secp256k1", "ed25519") (default "ed25519")
+      --mempool.max-txs int                             Sets MaxTx value for the app-side mempool (default -1)
+      --min-retain-blocks uint                          Minimum block height offset during ABCI commit to prune CometBFT blocks
+      --minimum-gas-prices string                       Minimum gas prices to accept for transactions; Any fee in a tx must meet this minimum (e.g. 0.01photino;0.0001stake)
+      --moniker string                                  node name (default "cordt-ms7917")
+      --p2p.external_address string                     ip:port address to advertise to peers for them to dial
+      --p2p.laddr string                                node listen address. (0.0.0.0:0 means any interface, any port) (default "tcp://0.0.0.0:26656")
+      --p2p.persistent_peers string                     comma-delimited ID@host:port persistent peers
+      --p2p.pex                                         enable/disable Peer-Exchange (default true)
+      --p2p.private_peer_ids string                     comma-delimited private peer IDs
+      --p2p.seed_mode                                   enable/disable seed mode
+      --p2p.seeds string                                comma-delimited ID@host:port seed nodes
+      --p2p.unconditional_peer_ids string               comma-delimited IDs of unconditional peers
+      --priv_validator_laddr string                     socket address to listen on for connections from external priv_validator process
+      --proxy_app string                                proxy app address, or one of: 'kvstore', 'persistent_kvstore' or 'noop' for local testing. (default "tcp://127.0.0.1:26658")
+      --pruning string                                  Pruning strategy (default|nothing|everything|custom) (default "default")
+      --pruning-interval uint                           Height interval at which pruned heights are removed from disk (ignored if pruning is not 'custom')
+      --pruning-keep-recent uint                        Number of recent heights to keep on disk (ignored if pruning is not 'custom')
+      --query-gas-limit uint                            Maximum gas a Rest/Grpc query can consume. Blank and 0 imply unbounded.
+      --rpc.laddr string                                RPC listen address. Port required (default "tcp://127.0.0.1:26657")
+      --rpc.pprof_laddr string                          pprof listen address (https://golang.org/pkg/net/http/pprof)
+      --rpc.unsafe                                      enabled unsafe rpc methods
+      --shutdown-grace duration                         On Shutdown, duration to wait for resource clean up
+      --state-sync.snapshot-interval uint               State sync snapshot interval
+      --state-sync.snapshot-keep-recent uint32          State sync snapshot to keep (default 2)
+      --trace                                           Provide full stack traces for errors in ABCI Log
+      --trace-store string                              Enable KVStore tracing to an output file
+      --transport string                                Transport protocol: socket, grpc (default "socket")
+      --unsafe-skip-upgrades ints                       Skip a set of upgrade heights to continue the old binary
+      --with-comet                                      Run abci app embedded in-process with CometBFT (default true)
+
+--- PASS: TestInterceptConfigsPreRunHandlerReadsFlags (0.00s)
+=== RUN   TestInterceptConfigsPreRunHandlerReadsEnvVars
+Your config.toml file structure is outdated.
+Added parameters:
+  + API
+  + AppDBBackend
+  + GRPC
+  + HaltHeight
+  + HaltTime
+  + IAVLCacheSize
+  + IAVLDisableFastNode
+  + IndexEvents
+  + InterBlockCache
+  + Mempool
+  + MinGasPrices
+  + MinRetainBlocks
+  + Pruning
+  + PruningInterval
+  + PruningKeepRecent
+  + QueryGasLimit
+  + StateSync
+  + Streaming
+  + Telemetry
+Removed parameters:
+  - abci
+  - blocksync
+  - consensus
+  - db_backend
+  - db_dir
+  - filter_peers
+  - genesis_file
+  - grpc
+  - instrumentation
+  - log_format
+  - log_level
+  - mempool
+  - moniker
+  - node_key_file
+  - p2p
+  - priv_validator_key_file
+  - priv_validator_laddr
+  - priv_validator_state_file
+  - proxy_app
+  - rpc
+  - statesync
+  - storage
+  - tx_index
+  - version
+Do you want to update config.toml with the new structure? (y/n): config.toml was not updated. Please manually update your file structure.
+Your app.toml file structure is outdated.
+Added parameters:
+  + API
+  + AppDBBackend
+  + GRPC
+  + HaltHeight
+  + HaltTime
+  + IAVLCacheSize
+  + IAVLDisableFastNode
+  + IndexEvents
+  + InterBlockCache
+  + Mempool
+  + MinGasPrices
+  + MinRetainBlocks
+  + Pruning
+  + PruningInterval
+  + PruningKeepRecent
+  + QueryGasLimit
+  + StateSync
+  + Streaming
+  + Telemetry
+Removed parameters:
+  - api
+  - app-db-backend
+  - grpc
+  - halt-height
+  - halt-time
+  - iavl-cache-size
+  - iavl-disable-fastnode
+  - index-events
+  - inter-block-cache
+  - mempool
+  - min-retain-blocks
+  - minimum-gas-prices
+  - pruning
+  - pruning-interval
+  - pruning-keep-recent
+  - query-gas-limit
+  - state-sync
+  - streaming
+  - telemetry
+Do you want to update app.toml with the new structure? (y/n): app.toml was not updated. Please manually update your file structure.
+Error: canceled in prerun
+Usage:
+  start [flags]
+
+Flags:
+      --abci string                                     specify abci transport (socket | grpc) (default "socket")
+      --address string                                  Listen address (default "tcp://127.0.0.1:26658")
+      --api.address string                              the API server address to listen on (default "tcp://localhost:1317")
+      --api.enable                                      Define if the API server should be enabled
+      --api.enabled-unsafe-cors                         Define if CORS should be enabled (unsafe - use it at your own risk)
+      --api.max-open-connections uint                   Define the number of maximum open connections (default 1000)
+      --api.rpc-max-body-bytes uint                     Define the CometBFT maximum request body (in bytes) (default 1000000)
+      --api.rpc-read-timeout uint                       Define the CometBFT RPC read timeout (in seconds) (default 10)
+      --api.rpc-write-timeout uint                      Define the CometBFT RPC write timeout (in seconds)
+      --api.swagger                                     Define if swagger documentation should automatically be registered (Note: the API must also be enabled)
+      --consensus.create_empty_blocks                   set this to false to only produce blocks when there are txs or when the AppHash changes (default true)
+      --consensus.create_empty_blocks_interval string   the possible interval between empty blocks (default "0s")
+      --consensus.double_sign_check_height int          how many blocks to look back to check existence of the node's consensus votes before joining consensus
+      --cpu-profile string                              Enable CPU profiling and write to the provided file
+      --db_backend string                               database backend: goleveldb | cleveldb | boltdb | rocksdb | badgerdb | pebbledb (default "goleveldb")
+      --db_dir string                                   database directory (default "data")
+      --genesis_hash bytesHex                           optional SHA-256 hash of the genesis file
+      --grpc-only                                       Start the node in gRPC query only mode (no CometBFT process is started)
+      --grpc.address string                             the gRPC server address to listen on (default "localhost:9090")
+      --grpc.enable                                     Define if the gRPC server should be enabled (default true)
+      --halt-height uint                                Block height at which to gracefully halt the chain and shutdown the node
+      --halt-time uint                                  Minimum block time (in Unix seconds) at which to gracefully halt the chain and shutdown the node
+  -h, --help                                            help for start
+      --home string                                      (default "/foobar")
+      --iavl-disable-fastnode                           Disable fast node for IAVL tree
+      --inter-block-cache                               Enable inter-block caching (default true)
+      --inv-check-period uint                           Assert registered invariants every N blocks
+  -k, --key-type string                                 private key type (one of "ed25519", "secp256k1") (default "ed25519")
+      --mempool.max-txs int                             Sets MaxTx value for the app-side mempool (default -1)
+      --min-retain-blocks uint                          Minimum block height offset during ABCI commit to prune CometBFT blocks
+      --minimum-gas-prices string                       Minimum gas prices to accept for transactions; Any fee in a tx must meet this minimum (e.g. 0.01photino;0.0001stake)
+      --moniker string                                  node name (default "cordt-ms7917")
+      --p2p.external_address string                     ip:port address to advertise to peers for them to dial
+      --p2p.laddr string                                node listen address. (0.0.0.0:0 means any interface, any port) (default "tcp://0.0.0.0:26656")
+      --p2p.persistent_peers string                     comma-delimited ID@host:port persistent peers
+      --p2p.pex                                         enable/disable Peer-Exchange (default true)
+      --p2p.private_peer_ids string                     comma-delimited private peer IDs
+      --p2p.seed_mode                                   enable/disable seed mode
+      --p2p.seeds string                                comma-delimited ID@host:port seed nodes
+      --p2p.unconditional_peer_ids string               comma-delimited IDs of unconditional peers
+      --priv_validator_laddr string                     socket address to listen on for connections from external priv_validator process
+      --proxy_app string                                proxy app address, or one of: 'kvstore', 'persistent_kvstore' or 'noop' for local testing. (default "tcp://127.0.0.1:26658")
+      --pruning string                                  Pruning strategy (default|nothing|everything|custom) (default "default")
+      --pruning-interval uint                           Height interval at which pruned heights are removed from disk (ignored if pruning is not 'custom')
+      --pruning-keep-recent uint                        Number of recent heights to keep on disk (ignored if pruning is not 'custom')
+      --query-gas-limit uint                            Maximum gas a Rest/Grpc query can consume. Blank and 0 imply unbounded.
+      --rpc.laddr string                                RPC listen address. Port required (default "tcp://127.0.0.1:26657")
+      --rpc.pprof_laddr string                          pprof listen address (https://golang.org/pkg/net/http/pprof)
+      --rpc.unsafe                                      enabled unsafe rpc methods
+      --shutdown-grace duration                         On Shutdown, duration to wait for resource clean up
+      --state-sync.snapshot-interval uint               State sync snapshot interval
+      --state-sync.snapshot-keep-recent uint32          State sync snapshot to keep (default 2)
+      --trace                                           Provide full stack traces for errors in ABCI Log
+      --trace-store string                              Enable KVStore tracing to an output file
+      --transport string                                Transport protocol: socket, grpc (default "socket")
+      --unsafe-skip-upgrades ints                       Skip a set of upgrade heights to continue the old binary
+      --with-comet                                      Run abci app embedded in-process with CometBFT (default true)
+
+--- PASS: TestInterceptConfigsPreRunHandlerReadsEnvVars (0.00s)
+=== RUN   TestInterceptConfigsPreRunHandlerPrecedenceFlag
+Your config.toml file structure is outdated.
+Added parameters:
+  + API
+  + AppDBBackend
+  + GRPC
+  + HaltHeight
+  + HaltTime
+  + IAVLCacheSize
+  + IAVLDisableFastNode
+  + IndexEvents
+  + InterBlockCache
+  + Mempool
+  + MinGasPrices
+  + MinRetainBlocks
+  + Pruning
+  + PruningInterval
+  + PruningKeepRecent
+  + QueryGasLimit
+  + StateSync
+  + Streaming
+  + Telemetry
+Removed parameters:
+  - rpc
+Do you want to update config.toml with the new structure? (y/n): config.toml was not updated. Please manually update your file structure.
+Your app.toml file structure is outdated.
+Added parameters:
+  + API
+  + AppDBBackend
+  + GRPC
+  + HaltHeight
+  + HaltTime
+  + IAVLCacheSize
+  + IAVLDisableFastNode
+  + IndexEvents
+  + InterBlockCache
+  + Mempool
+  + MinGasPrices
+  + MinRetainBlocks
+  + Pruning
+  + PruningInterval
+  + PruningKeepRecent
+  + QueryGasLimit
+  + StateSync
+  + Streaming
+  + Telemetry
+Removed parameters:
+  - api
+  - app-db-backend
+  - grpc
+  - halt-height
+  - halt-time
+  - iavl-cache-size
+  - iavl-disable-fastnode
+  - index-events
+  - inter-block-cache
+  - mempool
+  - min-retain-blocks
+  - minimum-gas-prices
+  - pruning
+  - pruning-interval
+  - pruning-keep-recent
+  - query-gas-limit
+  - state-sync
+  - streaming
+  - telemetry
+Do you want to update app.toml with the new structure? (y/n): app.toml was not updated. Please manually update your file structure.
+Error: canceled in prerun
+Usage:
+  start [flags]
+
+Flags:
+      --abci string                                     specify abci transport (socket | grpc) (default "socket")
+      --address string                                  Listen address (default "tcp://127.0.0.1:26658")
+      --api.address string                              the API server address to listen on (default "tcp://localhost:1317")
+      --api.enable                                      Define if the API server should be enabled
+      --api.enabled-unsafe-cors                         Define if CORS should be enabled (unsafe - use it at your own risk)
+      --api.max-open-connections uint                   Define the number of maximum open connections (default 1000)
+      --api.rpc-max-body-bytes uint                     Define the CometBFT maximum request body (in bytes) (default 1000000)
+      --api.rpc-read-timeout uint                       Define the CometBFT RPC read timeout (in seconds) (default 10)
+      --api.rpc-write-timeout uint                      Define the CometBFT RPC write timeout (in seconds)
+      --api.swagger                                     Define if swagger documentation should automatically be registered (Note: the API must also be enabled)
+      --consensus.create_empty_blocks                   set this to false to only produce blocks when there are txs or when the AppHash changes (default true)
+      --consensus.create_empty_blocks_interval string   the possible interval between empty blocks (default "0s")
+      --consensus.double_sign_check_height int          how many blocks to look back to check existence of the node's consensus votes before joining consensus
+      --cpu-profile string                              Enable CPU profiling and write to the provided file
+      --db_backend string                               database backend: goleveldb | cleveldb | boltdb | rocksdb | badgerdb | pebbledb (default "goleveldb")
+      --db_dir string                                   database directory (default "data")
+      --genesis_hash bytesHex                           optional SHA-256 hash of the genesis file
+      --grpc-only                                       Start the node in gRPC query only mode (no CometBFT process is started)
+      --grpc.address string                             the gRPC server address to listen on (default "localhost:9090")
+      --grpc.enable                                     Define if the gRPC server should be enabled (default true)
+      --halt-height uint                                Block height at which to gracefully halt the chain and shutdown the node
+      --halt-time uint                                  Minimum block time (in Unix seconds) at which to gracefully halt the chain and shutdown the node
+  -h, --help                                            help for start
+      --home string                                      (default "/tmp/TestInterceptConfigsPreRunHandlerPrecedenceFlag791978468/001")
+      --iavl-disable-fastnode                           Disable fast node for IAVL tree
+      --inter-block-cache                               Enable inter-block caching (default true)
+      --inv-check-period uint                           Assert registered invariants every N blocks
+  -k, --key-type string                                 private key type (one of "ed25519", "secp256k1") (default "ed25519")
+      --mempool.max-txs int                             Sets MaxTx value for the app-side mempool (default -1)
+      --min-retain-blocks uint                          Minimum block height offset during ABCI commit to prune CometBFT blocks
+      --minimum-gas-prices string                       Minimum gas prices to accept for transactions; Any fee in a tx must meet this minimum (e.g. 0.01photino;0.0001stake)
+      --moniker string                                  node name (default "cordt-ms7917")
+      --p2p.external_address string                     ip:port address to advertise to peers for them to dial
+      --p2p.laddr string                                node listen address. (0.0.0.0:0 means any interface, any port) (default "tcp://0.0.0.0:26656")
+      --p2p.persistent_peers string                     comma-delimited ID@host:port persistent peers
+      --p2p.pex                                         enable/disable Peer-Exchange (default true)
+      --p2p.private_peer_ids string                     comma-delimited private peer IDs
+      --p2p.seed_mode                                   enable/disable seed mode
+      --p2p.seeds string                                comma-delimited ID@host:port seed nodes
+      --p2p.unconditional_peer_ids string               comma-delimited IDs of unconditional peers
+      --priv_validator_laddr string                     socket address to listen on for connections from external priv_validator process
+      --proxy_app string                                proxy app address, or one of: 'kvstore', 'persistent_kvstore' or 'noop' for local testing. (default "tcp://127.0.0.1:26658")
+      --pruning string                                  Pruning strategy (default|nothing|everything|custom) (default "default")
+      --pruning-interval uint                           Height interval at which pruned heights are removed from disk (ignored if pruning is not 'custom')
+      --pruning-keep-recent uint                        Number of recent heights to keep on disk (ignored if pruning is not 'custom')
+      --query-gas-limit uint                            Maximum gas a Rest/Grpc query can consume. Blank and 0 imply unbounded.
+      --rpc.laddr string                                RPC listen address. Port required (default "tcp://127.0.0.1:26657")
+      --rpc.pprof_laddr string                          pprof listen address (https://golang.org/pkg/net/http/pprof)
+      --rpc.unsafe                                      enabled unsafe rpc methods
+      --shutdown-grace duration                         On Shutdown, duration to wait for resource clean up
+      --state-sync.snapshot-interval uint               State sync snapshot interval
+      --state-sync.snapshot-keep-recent uint32          State sync snapshot to keep (default 2)
+      --trace                                           Provide full stack traces for errors in ABCI Log
+      --trace-store string                              Enable KVStore tracing to an output file
+      --transport string                                Transport protocol: socket, grpc (default "socket")
+      --unsafe-skip-upgrades ints                       Skip a set of upgrade heights to continue the old binary
+      --with-comet                                      Run abci app embedded in-process with CometBFT (default true)
+
+--- PASS: TestInterceptConfigsPreRunHandlerPrecedenceFlag (0.00s)
+=== RUN   TestInterceptConfigsPreRunHandlerPrecedenceEnvVar
+Your config.toml file structure is outdated.
+Added parameters:
+  + API
+  + AppDBBackend
+  + GRPC
+  + HaltHeight
+  + HaltTime
+  + IAVLCacheSize
+  + IAVLDisableFastNode
+  + IndexEvents
+  + InterBlockCache
+  + Mempool
+  + MinGasPrices
+  + MinRetainBlocks
+  + Pruning
+  + PruningInterval
+  + PruningKeepRecent
+  + QueryGasLimit
+  + StateSync
+  + Streaming
+  + Telemetry
+Removed parameters:
+  - rpc
+Do you want to update config.toml with the new structure? (y/n): config.toml was not updated. Please manually update your file structure.
+Your app.toml file structure is outdated.
+Added parameters:
+  + API
+  + AppDBBackend
+  + GRPC
+  + HaltHeight
+  + HaltTime
+  + IAVLCacheSize
+  + IAVLDisableFastNode
+  + IndexEvents
+  + InterBlockCache
+  + Mempool
+  + MinGasPrices
+  + MinRetainBlocks
+  + Pruning
+  + PruningInterval
+  + PruningKeepRecent
+  + QueryGasLimit
+  + StateSync
+  + Streaming
+  + Telemetry
+Removed parameters:
+  - api
+  - app-db-backend
+  - grpc
+  - halt-height
+  - halt-time
+  - iavl-cache-size
+  - iavl-disable-fastnode
+  - index-events
+  - inter-block-cache
+  - mempool
+  - min-retain-blocks
+  - minimum-gas-prices
+  - pruning
+  - pruning-interval
+  - pruning-keep-recent
+  - query-gas-limit
+  - state-sync
+  - streaming
+  - telemetry
+Do you want to update app.toml with the new structure? (y/n): app.toml was not updated. Please manually update your file structure.
+Error: canceled in prerun
+Usage:
+  start [flags]
+
+Flags:
+      --abci string                                     specify abci transport (socket | grpc) (default "socket")
+      --address string                                  Listen address (default "tcp://127.0.0.1:26658")
+      --api.address string                              the API server address to listen on (default "tcp://localhost:1317")
+      --api.enable                                      Define if the API server should be enabled
+      --api.enabled-unsafe-cors                         Define if CORS should be enabled (unsafe - use it at your own risk)
+      --api.max-open-connections uint                   Define the number of maximum open connections (default 1000)
+      --api.rpc-max-body-bytes uint                     Define the CometBFT maximum request body (in bytes) (default 1000000)
+      --api.rpc-read-timeout uint                       Define the CometBFT RPC read timeout (in seconds) (default 10)
+      --api.rpc-write-timeout uint                      Define the CometBFT RPC write timeout (in seconds)
+      --api.swagger                                     Define if swagger documentation should automatically be registered (Note: the API must also be enabled)
+      --consensus.create_empty_blocks                   set this to false to only produce blocks when there are txs or when the AppHash changes (default true)
+      --consensus.create_empty_blocks_interval string   the possible interval between empty blocks (default "0s")
+      --consensus.double_sign_check_height int          how many blocks to look back to check existence of the node's consensus votes before joining consensus
+      --cpu-profile string                              Enable CPU profiling and write to the provided file
+      --db_backend string                               database backend: goleveldb | cleveldb | boltdb | rocksdb | badgerdb | pebbledb (default "goleveldb")
+      --db_dir string                                   database directory (default "data")
+      --genesis_hash bytesHex                           optional SHA-256 hash of the genesis file
+      --grpc-only                                       Start the node in gRPC query only mode (no CometBFT process is started)
+      --grpc.address string                             the gRPC server address to listen on (default "localhost:9090")
+      --grpc.enable                                     Define if the gRPC server should be enabled (default true)
+      --halt-height uint                                Block height at which to gracefully halt the chain and shutdown the node
+      --halt-time uint                                  Minimum block time (in Unix seconds) at which to gracefully halt the chain and shutdown the node
+  -h, --help                                            help for start
+      --home string                                      (default "/tmp/TestInterceptConfigsPreRunHandlerPrecedenceEnvVar2902878200/001")
+      --iavl-disable-fastnode                           Disable fast node for IAVL tree
+      --inter-block-cache                               Enable inter-block caching (default true)
+      --inv-check-period uint                           Assert registered invariants every N blocks
+  -k, --key-type string                                 private key type (one of "secp256k1", "ed25519") (default "ed25519")
+      --mempool.max-txs int                             Sets MaxTx value for the app-side mempool (default -1)
+      --min-retain-blocks uint                          Minimum block height offset during ABCI commit to prune CometBFT blocks
+      --minimum-gas-prices string                       Minimum gas prices to accept for transactions; Any fee in a tx must meet this minimum (e.g. 0.01photino;0.0001stake)
+      --moniker string                                  node name (default "cordt-ms7917")
+      --p2p.external_address string                     ip:port address to advertise to peers for them to dial
+      --p2p.laddr string                                node listen address. (0.0.0.0:0 means any interface, any port) (default "tcp://0.0.0.0:26656")
+      --p2p.persistent_peers string                     comma-delimited ID@host:port persistent peers
+      --p2p.pex                                         enable/disable Peer-Exchange (default true)
+      --p2p.private_peer_ids string                     comma-delimited private peer IDs
+      --p2p.seed_mode                                   enable/disable seed mode
+      --p2p.seeds string                                comma-delimited ID@host:port seed nodes
+      --p2p.unconditional_peer_ids string               comma-delimited IDs of unconditional peers
+      --priv_validator_laddr string                     socket address to listen on for connections from external priv_validator process
+      --proxy_app string                                proxy app address, or one of: 'kvstore', 'persistent_kvstore' or 'noop' for local testing. (default "tcp://127.0.0.1:26658")
+      --pruning string                                  Pruning strategy (default|nothing|everything|custom) (default "default")
+      --pruning-interval uint                           Height interval at which pruned heights are removed from disk (ignored if pruning is not 'custom')
+      --pruning-keep-recent uint                        Number of recent heights to keep on disk (ignored if pruning is not 'custom')
+      --query-gas-limit uint                            Maximum gas a Rest/Grpc query can consume. Blank and 0 imply unbounded.
+      --rpc.laddr string                                RPC listen address. Port required (default "tcp://127.0.0.1:26657")
+      --rpc.pprof_laddr string                          pprof listen address (https://golang.org/pkg/net/http/pprof)
+      --rpc.unsafe                                      enabled unsafe rpc methods
+      --shutdown-grace duration                         On Shutdown, duration to wait for resource clean up
+      --state-sync.snapshot-interval uint               State sync snapshot interval
+      --state-sync.snapshot-keep-recent uint32          State sync snapshot to keep (default 2)
+      --trace                                           Provide full stack traces for errors in ABCI Log
+      --trace-store string                              Enable KVStore tracing to an output file
+      --transport string                                Transport protocol: socket, grpc (default "socket")
+      --unsafe-skip-upgrades ints                       Skip a set of upgrade heights to continue the old binary
+      --with-comet                                      Run abci app embedded in-process with CometBFT (default true)
+
+--- PASS: TestInterceptConfigsPreRunHandlerPrecedenceEnvVar (0.00s)
+=== RUN   TestInterceptConfigsPreRunHandlerPrecedenceConfigFile
+Your config.toml file structure is outdated.
+Added parameters:
+  + API
+  + AppDBBackend
+  + GRPC
+  + HaltHeight
+  + HaltTime
+  + IAVLCacheSize
+  + IAVLDisableFastNode
+  + IndexEvents
+  + InterBlockCache
+  + Mempool
+  + MinGasPrices
+  + MinRetainBlocks
+  + Pruning
+  + PruningInterval
+  + PruningKeepRecent
+  + QueryGasLimit
+  + StateSync
+  + Streaming
+  + Telemetry
+Removed parameters:
+  - rpc
+Do you want to update config.toml with the new structure? (y/n): config.toml was not updated. Please manually update your file structure.
+Your app.toml file structure is outdated.
+Added parameters:
+  + API
+  + AppDBBackend
+  + GRPC
+  + HaltHeight
+  + HaltTime
+  + IAVLCacheSize
+  + IAVLDisableFastNode
+  + IndexEvents
+  + InterBlockCache
+  + Mempool
+  + MinGasPrices
+  + MinRetainBlocks
+  + Pruning
+  + PruningInterval
+  + PruningKeepRecent
+  + QueryGasLimit
+  + StateSync
+  + Streaming
+  + Telemetry
+Removed parameters:
+  - api
+  - app-db-backend
+  - grpc
+  - halt-height
+  - halt-time
+  - iavl-cache-size
+  - iavl-disable-fastnode
+  - index-events
+  - inter-block-cache
+  - mempool
+  - min-retain-blocks
+  - minimum-gas-prices
+  - pruning
+  - pruning-interval
+  - pruning-keep-recent
+  - query-gas-limit
+  - state-sync
+  - streaming
+  - telemetry
+Do you want to update app.toml with the new structure? (y/n): app.toml was not updated. Please manually update your file structure.
+Error: canceled in prerun
+Usage:
+  start [flags]
+
+Flags:
+      --abci string                                     specify abci transport (socket | grpc) (default "socket")
+      --address string                                  Listen address (default "tcp://127.0.0.1:26658")
+      --api.address string                              the API server address to listen on (default "tcp://localhost:1317")
+      --api.enable                                      Define if the API server should be enabled
+      --api.enabled-unsafe-cors                         Define if CORS should be enabled (unsafe - use it at your own risk)
+      --api.max-open-connections uint                   Define the number of maximum open connections (default 1000)
+      --api.rpc-max-body-bytes uint                     Define the CometBFT maximum request body (in bytes) (default 1000000)
+      --api.rpc-read-timeout uint                       Define the CometBFT RPC read timeout (in seconds) (default 10)
+      --api.rpc-write-timeout uint                      Define the CometBFT RPC write timeout (in seconds)
+      --api.swagger                                     Define if swagger documentation should automatically be registered (Note: the API must also be enabled)
+      --consensus.create_empty_blocks                   set this to false to only produce blocks when there are txs or when the AppHash changes (default true)
+      --consensus.create_empty_blocks_interval string   the possible interval between empty blocks (default "0s")
+      --consensus.double_sign_check_height int          how many blocks to look back to check existence of the node's consensus votes before joining consensus
+      --cpu-profile string                              Enable CPU profiling and write to the provided file
+      --db_backend string                               database backend: goleveldb | cleveldb | boltdb | rocksdb | badgerdb | pebbledb (default "goleveldb")
+      --db_dir string                                   database directory (default "data")
+      --genesis_hash bytesHex                           optional SHA-256 hash of the genesis file
+      --grpc-only                                       Start the node in gRPC query only mode (no CometBFT process is started)
+      --grpc.address string                             the gRPC server address to listen on (default "localhost:9090")
+      --grpc.enable                                     Define if the gRPC server should be enabled (default true)
+      --halt-height uint                                Block height at which to gracefully halt the chain and shutdown the node
+      --halt-time uint                                  Minimum block time (in Unix seconds) at which to gracefully halt the chain and shutdown the node
+  -h, --help                                            help for start
+      --home string                                      (default "/tmp/TestInterceptConfigsPreRunHandlerPrecedenceConfigFile929598189/001")
+      --iavl-disable-fastnode                           Disable fast node for IAVL tree
+      --inter-block-cache                               Enable inter-block caching (default true)
+      --inv-check-period uint                           Assert registered invariants every N blocks
+  -k, --key-type string                                 private key type (one of "ed25519", "secp256k1") (default "ed25519")
+      --mempool.max-txs int                             Sets MaxTx value for the app-side mempool (default -1)
+      --min-retain-blocks uint                          Minimum block height offset during ABCI commit to prune CometBFT blocks
+      --minimum-gas-prices string                       Minimum gas prices to accept for transactions; Any fee in a tx must meet this minimum (e.g. 0.01photino;0.0001stake)
+      --moniker string                                  node name (default "cordt-ms7917")
+      --p2p.external_address string                     ip:port address to advertise to peers for them to dial
+      --p2p.laddr string                                node listen address. (0.0.0.0:0 means any interface, any port) (default "tcp://0.0.0.0:26656")
+      --p2p.persistent_peers string                     comma-delimited ID@host:port persistent peers
+      --p2p.pex                                         enable/disable Peer-Exchange (default true)
+      --p2p.private_peer_ids string                     comma-delimited private peer IDs
+      --p2p.seed_mode                                   enable/disable seed mode
+      --p2p.seeds string                                comma-delimited ID@host:port seed nodes
+      --p2p.unconditional_peer_ids string               comma-delimited IDs of unconditional peers
+      --priv_validator_laddr string                     socket address to listen on for connections from external priv_validator process
+      --proxy_app string                                proxy app address, or one of: 'kvstore', 'persistent_kvstore' or 'noop' for local testing. (default "tcp://127.0.0.1:26658")
+      --pruning string                                  Pruning strategy (default|nothing|everything|custom) (default "default")
+      --pruning-interval uint                           Height interval at which pruned heights are removed from disk (ignored if pruning is not 'custom')
+      --pruning-keep-recent uint                        Number of recent heights to keep on disk (ignored if pruning is not 'custom')
+      --query-gas-limit uint                            Maximum gas a Rest/Grpc query can consume. Blank and 0 imply unbounded.
+      --rpc.laddr string                                RPC listen address. Port required (default "tcp://127.0.0.1:26657")
+      --rpc.pprof_laddr string                          pprof listen address (https://golang.org/pkg/net/http/pprof)
+      --rpc.unsafe                                      enabled unsafe rpc methods
+      --shutdown-grace duration                         On Shutdown, duration to wait for resource clean up
+      --state-sync.snapshot-interval uint               State sync snapshot interval
+      --state-sync.snapshot-keep-recent uint32          State sync snapshot to keep (default 2)
+      --trace                                           Provide full stack traces for errors in ABCI Log
+      --trace-store string                              Enable KVStore tracing to an output file
+      --transport string                                Transport protocol: socket, grpc (default "socket")
+      --unsafe-skip-upgrades ints                       Skip a set of upgrade heights to continue the old binary
+      --with-comet                                      Run abci app embedded in-process with CometBFT (default true)
+
+--- PASS: TestInterceptConfigsPreRunHandlerPrecedenceConfigFile (0.00s)
+=== RUN   TestInterceptConfigsPreRunHandlerPrecedenceConfigDefault
+Your config.toml file structure is outdated.
+Added parameters:
+  + API
+  + AppDBBackend
+  + GRPC
+  + HaltHeight
+  + HaltTime
+  + IAVLCacheSize
+  + IAVLDisableFastNode
+  + IndexEvents
+  + InterBlockCache
+  + Mempool
+  + MinGasPrices
+  + MinRetainBlocks
+  + Pruning
+  + PruningInterval
+  + PruningKeepRecent
+  + QueryGasLimit
+  + StateSync
+  + Streaming
+  + Telemetry
+Removed parameters:
+  - abci
+  - blocksync
+  - consensus
+  - db_backend
+  - db_dir
+  - filter_peers
+  - genesis_file
+  - grpc
+  - instrumentation
+  - log_format
+  - log_level
+  - mempool
+  - moniker
+  - node_key_file
+  - p2p
+  - priv_validator_key_file
+  - priv_validator_laddr
+  - priv_validator_state_file
+  - proxy_app
+  - rpc
+  - statesync
+  - storage
+  - tx_index
+  - version
+Do you want to update config.toml with the new structure? (y/n): config.toml was not updated. Please manually update your file structure.
+Your app.toml file structure is outdated.
+Added parameters:
+  + API
+  + AppDBBackend
+  + GRPC
+  + HaltHeight
+  + HaltTime
+  + IAVLCacheSize
+  + IAVLDisableFastNode
+  + IndexEvents
+  + InterBlockCache
+  + Mempool
+  + MinGasPrices
+  + MinRetainBlocks
+  + Pruning
+  + PruningInterval
+  + PruningKeepRecent
+  + QueryGasLimit
+  + StateSync
+  + Streaming
+  + Telemetry
+Removed parameters:
+  - api
+  - app-db-backend
+  - grpc
+  - halt-height
+  - halt-time
+  - iavl-cache-size
+  - iavl-disable-fastnode
+  - index-events
+  - inter-block-cache
+  - mempool
+  - min-retain-blocks
+  - minimum-gas-prices
+  - pruning
+  - pruning-interval
+  - pruning-keep-recent
+  - query-gas-limit
+  - state-sync
+  - streaming
+  - telemetry
+Do you want to update app.toml with the new structure? (y/n): app.toml was not updated. Please manually update your file structure.
+Error: canceled in prerun
+Usage:
+  start [flags]
+
+Flags:
+      --abci string                                     specify abci transport (socket | grpc) (default "socket")
+      --address string                                  Listen address (default "tcp://127.0.0.1:26658")
+      --api.address string                              the API server address to listen on (default "tcp://localhost:1317")
+      --api.enable                                      Define if the API server should be enabled
+      --api.enabled-unsafe-cors                         Define if CORS should be enabled (unsafe - use it at your own risk)
+      --api.max-open-connections uint                   Define the number of maximum open connections (default 1000)
+      --api.rpc-max-body-bytes uint                     Define the CometBFT maximum request body (in bytes) (default 1000000)
+      --api.rpc-read-timeout uint                       Define the CometBFT RPC read timeout (in seconds) (default 10)
+      --api.rpc-write-timeout uint                      Define the CometBFT RPC write timeout (in seconds)
+      --api.swagger                                     Define if swagger documentation should automatically be registered (Note: the API must also be enabled)
+      --consensus.create_empty_blocks                   set this to false to only produce blocks when there are txs or when the AppHash changes (default true)
+      --consensus.create_empty_blocks_interval string   the possible interval between empty blocks (default "0s")
+      --consensus.double_sign_check_height int          how many blocks to look back to check existence of the node's consensus votes before joining consensus
+      --cpu-profile string                              Enable CPU profiling and write to the provided file
+      --db_backend string                               database backend: goleveldb | cleveldb | boltdb | rocksdb | badgerdb | pebbledb (default "goleveldb")
+      --db_dir string                                   database directory (default "data")
+      --genesis_hash bytesHex                           optional SHA-256 hash of the genesis file
+      --grpc-only                                       Start the node in gRPC query only mode (no CometBFT process is started)
+      --grpc.address string                             the gRPC server address to listen on (default "localhost:9090")
+      --grpc.enable                                     Define if the gRPC server should be enabled (default true)
+      --halt-height uint                                Block height at which to gracefully halt the chain and shutdown the node
+      --halt-time uint                                  Minimum block time (in Unix seconds) at which to gracefully halt the chain and shutdown the node
+  -h, --help                                            help for start
+      --home string                                      (default "/tmp/TestInterceptConfigsPreRunHandlerPrecedenceConfigDefault736241957/001")
+      --iavl-disable-fastnode                           Disable fast node for IAVL tree
+      --inter-block-cache                               Enable inter-block caching (default true)
+      --inv-check-period uint                           Assert registered invariants every N blocks
+  -k, --key-type string                                 private key type (one of "ed25519", "secp256k1") (default "ed25519")
+      --mempool.max-txs int                             Sets MaxTx value for the app-side mempool (default -1)
+      --min-retain-blocks uint                          Minimum block height offset during ABCI commit to prune CometBFT blocks
+      --minimum-gas-prices string                       Minimum gas prices to accept for transactions; Any fee in a tx must meet this minimum (e.g. 0.01photino;0.0001stake)
+      --moniker string                                  node name (default "cordt-ms7917")
+      --p2p.external_address string                     ip:port address to advertise to peers for them to dial
+      --p2p.laddr string                                node listen address. (0.0.0.0:0 means any interface, any port) (default "tcp://0.0.0.0:26656")
+      --p2p.persistent_peers string                     comma-delimited ID@host:port persistent peers
+      --p2p.pex                                         enable/disable Peer-Exchange (default true)
+      --p2p.private_peer_ids string                     comma-delimited private peer IDs
+      --p2p.seed_mode                                   enable/disable seed mode
+      --p2p.seeds string                                comma-delimited ID@host:port seed nodes
+      --p2p.unconditional_peer_ids string               comma-delimited IDs of unconditional peers
+      --priv_validator_laddr string                     socket address to listen on for connections from external priv_validator process
+      --proxy_app string                                proxy app address, or one of: 'kvstore', 'persistent_kvstore' or 'noop' for local testing. (default "tcp://127.0.0.1:26658")
+      --pruning string                                  Pruning strategy (default|nothing|everything|custom) (default "default")
+      --pruning-interval uint                           Height interval at which pruned heights are removed from disk (ignored if pruning is not 'custom')
+      --pruning-keep-recent uint                        Number of recent heights to keep on disk (ignored if pruning is not 'custom')
+      --query-gas-limit uint                            Maximum gas a Rest/Grpc query can consume. Blank and 0 imply unbounded.
+      --rpc.laddr string                                RPC listen address. Port required (default "tcp://127.0.0.1:26657")
+      --rpc.pprof_laddr string                          pprof listen address (https://golang.org/pkg/net/http/pprof)
+      --rpc.unsafe                                      enabled unsafe rpc methods
+      --shutdown-grace duration                         On Shutdown, duration to wait for resource clean up
+      --state-sync.snapshot-interval uint               State sync snapshot interval
+      --state-sync.snapshot-keep-recent uint32          State sync snapshot to keep (default 2)
+      --trace                                           Provide full stack traces for errors in ABCI Log
+      --trace-store string                              Enable KVStore tracing to an output file
+      --transport string                                Transport protocol: socket, grpc (default "socket")
+      --unsafe-skip-upgrades ints                       Skip a set of upgrade heights to continue the old binary
+      --with-comet                                      Run abci app embedded in-process with CometBFT (default true)
+
+--- PASS: TestInterceptConfigsPreRunHandlerPrecedenceConfigDefault (0.00s)
+=== RUN   TestInterceptConfigsWithBadPermissions
+Error: stat /tmp/TestInterceptConfigsWithBadPermissions1843299801/001/nonPerms/config/config.toml: permission denied
+Usage:
+  start [flags]
+
+Flags:
+      --abci string                                     specify abci transport (socket | grpc) (default "socket")
+      --address string                                  Listen address (default "tcp://127.0.0.1:26658")
+      --api.address string                              the API server address to listen on (default "tcp://localhost:1317")
+      --api.enable                                      Define if the API server should be enabled
+      --api.enabled-unsafe-cors                         Define if CORS should be enabled (unsafe - use it at your own risk)
+      --api.max-open-connections uint                   Define the number of maximum open connections (default 1000)
+      --api.rpc-max-body-bytes uint                     Define the CometBFT maximum request body (in bytes) (default 1000000)
+      --api.rpc-read-timeout uint                       Define the CometBFT RPC read timeout (in seconds) (default 10)
+      --api.rpc-write-timeout uint                      Define the CometBFT RPC write timeout (in seconds)
+      --api.swagger                                     Define if swagger documentation should automatically be registered (Note: the API must also be enabled)
+      --consensus.create_empty_blocks                   set this to false to only produce blocks when there are txs or when the AppHash changes (default true)
+      --consensus.create_empty_blocks_interval string   the possible interval between empty blocks (default "0s")
+      --consensus.double_sign_check_height int          how many blocks to look back to check existence of the node's consensus votes before joining consensus
+      --cpu-profile string                              Enable CPU profiling and write to the provided file
+      --db_backend string                               database backend: goleveldb | cleveldb | boltdb | rocksdb | badgerdb | pebbledb (default "goleveldb")
+      --db_dir string                                   database directory (default "data")
+      --genesis_hash bytesHex                           optional SHA-256 hash of the genesis file
+      --grpc-only                                       Start the node in gRPC query only mode (no CometBFT process is started)
+      --grpc.address string                             the gRPC server address to listen on (default "localhost:9090")
+      --grpc.enable                                     Define if the gRPC server should be enabled (default true)
+      --halt-height uint                                Block height at which to gracefully halt the chain and shutdown the node
+      --halt-time uint                                  Minimum block time (in Unix seconds) at which to gracefully halt the chain and shutdown the node
+  -h, --help                                            help for start
+      --home string                                      (default "/foobar")
+      --iavl-disable-fastnode                           Disable fast node for IAVL tree
+      --inter-block-cache                               Enable inter-block caching (default true)
+      --inv-check-period uint                           Assert registered invariants every N blocks
+  -k, --key-type string                                 private key type (one of "ed25519", "secp256k1") (default "ed25519")
+      --mempool.max-txs int                             Sets MaxTx value for the app-side mempool (default -1)
+      --min-retain-blocks uint                          Minimum block height offset during ABCI commit to prune CometBFT blocks
+      --minimum-gas-prices string                       Minimum gas prices to accept for transactions; Any fee in a tx must meet this minimum (e.g. 0.01photino;0.0001stake)
+      --moniker string                                  node name (default "cordt-ms7917")
+      --p2p.external_address string                     ip:port address to advertise to peers for them to dial
+      --p2p.laddr string                                node listen address. (0.0.0.0:0 means any interface, any port) (default "tcp://0.0.0.0:26656")
+      --p2p.persistent_peers string                     comma-delimited ID@host:port persistent peers
+      --p2p.pex                                         enable/disable Peer-Exchange (default true)
+      --p2p.private_peer_ids string                     comma-delimited private peer IDs
+      --p2p.seed_mode                                   enable/disable seed mode
+      --p2p.seeds string                                comma-delimited ID@host:port seed nodes
+      --p2p.unconditional_peer_ids string               comma-delimited IDs of unconditional peers
+      --priv_validator_laddr string                     socket address to listen on for connections from external priv_validator process
+      --proxy_app string                                proxy app address, or one of: 'kvstore', 'persistent_kvstore' or 'noop' for local testing. (default "tcp://127.0.0.1:26658")
+      --pruning string                                  Pruning strategy (default|nothing|everything|custom) (default "default")
+      --pruning-interval uint                           Height interval at which pruned heights are removed from disk (ignored if pruning is not 'custom')
+      --pruning-keep-recent uint                        Number of recent heights to keep on disk (ignored if pruning is not 'custom')
+      --query-gas-limit uint                            Maximum gas a Rest/Grpc query can consume. Blank and 0 imply unbounded.
+      --rpc.laddr string                                RPC listen address. Port required (default "tcp://127.0.0.1:26657")
+      --rpc.pprof_laddr string                          pprof listen address (https://golang.org/pkg/net/http/pprof)
+      --rpc.unsafe                                      enabled unsafe rpc methods
+      --shutdown-grace duration                         On Shutdown, duration to wait for resource clean up
+      --state-sync.snapshot-interval uint               State sync snapshot interval
+      --state-sync.snapshot-keep-recent uint32          State sync snapshot to keep (default 2)
+      --trace                                           Provide full stack traces for errors in ABCI Log
+      --trace-store string                              Enable KVStore tracing to an output file
+      --transport string                                Transport protocol: socket, grpc (default "socket")
+      --unsafe-skip-upgrades ints                       Skip a set of upgrade heights to continue the old binary
+      --with-comet                                      Run abci app embedded in-process with CometBFT (default true)
+
+--- PASS: TestInterceptConfigsWithBadPermissions (0.00s)
+=== RUN   TestEmptyMinGasPrices
+{
+ "moniker": "appnode-test",
+ "chain_id": "test-chain-eRfnR2",
+ "node_id": "116b25b51c910bf2d205223473466ab21cdcf00a",
+ "gentxs_dir": "",
+ "app_message": {}
+}
+[90m5:56PM[0m DBG received quit signal
+Error: set min gas price in app.toml or flag or env variable: error in app.toml
+Usage:
+  start [flags]
+
+Flags:
+      --abci string                                     specify abci transport (socket | grpc) (default "socket")
+      --address string                                  Listen address (default "tcp://127.0.0.1:26658")
+      --api.address string                              the API server address to listen on (default "tcp://localhost:1317")
+      --api.enable                                      Define if the API server should be enabled
+      --api.enabled-unsafe-cors                         Define if CORS should be enabled (unsafe - use it at your own risk)
+      --api.max-open-connections uint                   Define the number of maximum open connections (default 1000)
+      --api.rpc-max-body-bytes uint                     Define the CometBFT maximum request body (in bytes) (default 1000000)
+      --api.rpc-read-timeout uint                       Define the CometBFT RPC read timeout (in seconds) (default 10)
+      --api.rpc-write-timeout uint                      Define the CometBFT RPC write timeout (in seconds)
+      --api.swagger                                     Define if swagger documentation should automatically be registered (Note: the API must also be enabled)
+      --consensus.create_empty_blocks                   set this to false to only produce blocks when there are txs or when the AppHash changes (default true)
+      --consensus.create_empty_blocks_interval string   the possible interval between empty blocks (default "0s")
+      --consensus.double_sign_check_height int          how many blocks to look back to check existence of the node's consensus votes before joining consensus
+      --cpu-profile string                              Enable CPU profiling and write to the provided file
+      --db_backend string                               database backend: goleveldb | cleveldb | boltdb | rocksdb | badgerdb | pebbledb (default "goleveldb")
+      --db_dir string                                   database directory (default "data")
+      --genesis_hash bytesHex                           optional SHA-256 hash of the genesis file
+      --grpc-only                                       Start the node in gRPC query only mode (no CometBFT process is started)
+      --grpc.address string                             the gRPC server address to listen on (default "localhost:9090")
+      --grpc.enable                                     Define if the gRPC server should be enabled (default true)
+      --halt-height uint                                Block height at which to gracefully halt the chain and shutdown the node
+      --halt-time uint                                  Minimum block time (in Unix seconds) at which to gracefully halt the chain and shutdown the node
+  -h, --help                                            help for start
+      --home string                                      (default "/tmp/TestEmptyMinGasPrices2100869614/001")
+      --iavl-disable-fastnode                           Disable fast node for IAVL tree
+      --inter-block-cache                               Enable inter-block caching (default true)
+      --inv-check-period uint                           Assert registered invariants every N blocks
+  -k, --key-type string                                 private key type (one of "ed25519", "secp256k1") (default "ed25519")
+      --mempool.max-txs int                             Sets MaxTx value for the app-side mempool (default -1)
+      --min-retain-blocks uint                          Minimum block height offset during ABCI commit to prune CometBFT blocks
+      --minimum-gas-prices string                       Minimum gas prices to accept for transactions; Any fee in a tx must meet this minimum (e.g. 0.01photino;0.0001stake)
+      --moniker string                                  node name (default "cordt-ms7917")
+      --p2p.external_address string                     ip:port address to advertise to peers for them to dial
+      --p2p.laddr string                                node listen address. (0.0.0.0:0 means any interface, any port) (default "tcp://0.0.0.0:26656")
+      --p2p.persistent_peers string                     comma-delimited ID@host:port persistent peers
+      --p2p.pex                                         enable/disable Peer-Exchange (default true)
+      --p2p.private_peer_ids string                     comma-delimited private peer IDs
+      --p2p.seed_mode                                   enable/disable seed mode
+      --p2p.seeds string                                comma-delimited ID@host:port seed nodes
+      --p2p.unconditional_peer_ids string               comma-delimited IDs of unconditional peers
+      --priv_validator_laddr string                     socket address to listen on for connections from external priv_validator process
+      --proxy_app string                                proxy app address, or one of: 'kvstore', 'persistent_kvstore' or 'noop' for local testing. (default "tcp://127.0.0.1:26658")
+      --pruning string                                  Pruning strategy (default|nothing|everything|custom) (default "default")
+      --pruning-interval uint                           Height interval at which pruned heights are removed from disk (ignored if pruning is not 'custom')
+      --pruning-keep-recent uint                        Number of recent heights to keep on disk (ignored if pruning is not 'custom')
+      --query-gas-limit uint                            Maximum gas a Rest/Grpc query can consume. Blank and 0 imply unbounded.
+      --rpc.laddr string                                RPC listen address. Port required (default "tcp://127.0.0.1:26657")
+      --rpc.pprof_laddr string                          pprof listen address (https://golang.org/pkg/net/http/pprof)
+      --rpc.unsafe                                      enabled unsafe rpc methods
+      --shutdown-grace duration                         On Shutdown, duration to wait for resource clean up
+      --state-sync.snapshot-interval uint               State sync snapshot interval
+      --state-sync.snapshot-keep-recent uint32          State sync snapshot to keep (default 2)
+      --trace                                           Provide full stack traces for errors in ABCI Log
+      --trace-store string                              Enable KVStore tracing to an output file
+      --transport string                                Transport protocol: socket, grpc (default "socket")
+      --unsafe-skip-upgrades ints                       Skip a set of upgrade heights to continue the old binary
+      --with-comet                                      Run abci app embedded in-process with CometBFT (default true)
+
+--- PASS: TestEmptyMinGasPrices (0.01s)
+=== CONT  Test_OpenDB
+=== CONT  Test_openTraceWriter
+--- PASS: Test_openTraceWriter (0.00s)
+--- PASS: Test_OpenDB (0.00s)
+FAIL
+FAIL	github.com/cosmos/cosmos-sdk/server	0.050s
+FAIL

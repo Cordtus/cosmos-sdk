@@ -109,6 +109,12 @@ func InterceptConfigsPreRunHandler(cmd *cobra.Command, customAppConfigTemplate s
 		return err
 	}
 
+	// Add this block to check and potentially update config files
+	homeDir := serverCtx.Viper.GetString(flags.FlagHome)
+	if err := CheckConfigFiles(homeDir); err != nil {
+		return fmt.Errorf("error checking config files: %w", err)
+	}
+
 	// overwrite default server logger
 	logger, err := CreateSDKLogger(serverCtx, cmd.OutOrStdout())
 	if err != nil {
