@@ -2,6 +2,8 @@ package node
 
 import (
 	context "context"
+	"regexp"
+	"strconv"
 
 	gogogrpc "github.com/cosmos/gogoproto/grpc"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
@@ -55,8 +57,22 @@ func (s queryServer) Status(ctx context.Context, _ *StatusRequest) (*StatusRespo
 	var earliestHeight uint64
 	if s.clientCtx.Client != nil {
 		if node, err := s.clientCtx.GetNode(); err == nil {
-			if status, err := node.Status(ctx); err == nil {
-				earliestHeight = uint64(status.SyncInfo.EarliestBlockHeight)
+			// Try to query block at height 1 to determine earliest available height
+			height := int64(1)
+			_, err := node.Block(ctx, &height)
+			if err == nil {
+				// Block at height 1 exists, so earliest height is 1
+				earliestHeight = 1
+			} else {
+				// Parse error message to extract lowest available height
+				// Expected format: "height X is not available, lowest height is Y"
+				re := regexp.MustCompile(`lowest height is (\d+)`)
+				matches := re.FindStringSubmatch(err.Error())
+				if len(matches) > 1 {
+					if parsed, parseErr := strconv.ParseUint(matches[1], 10, 64); parseErr == nil {
+						earliestHeight = parsed
+					}
+				}
 			}
 		}
 	}

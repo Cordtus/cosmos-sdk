@@ -2,10 +2,12 @@ package node
 
 import (
 	"context"
+	"fmt"
 	"testing"
 	"time"
 
 	cmtproto "github.com/cometbft/cometbft/proto/tendermint/types"
+	cmttypes "github.com/cometbft/cometbft/types"
 	coretypes "github.com/cometbft/cometbft/rpc/core/types"
 	"github.com/stretchr/testify/require"
 
@@ -19,11 +21,13 @@ type mockCometRPC struct {
 	earliestBlockHeight int64
 }
 
-func (m mockCometRPC) Status(ctx context.Context) (*coretypes.ResultStatus, error) {
-	return &coretypes.ResultStatus{
-		SyncInfo: coretypes.SyncInfo{
-			EarliestBlockHeight: m.earliestBlockHeight,
-		},
+func (m mockCometRPC) Block(ctx context.Context, height *int64) (*coretypes.ResultBlock, error) {
+	if height != nil && *height < m.earliestBlockHeight {
+		return nil, fmt.Errorf("height %d is not available, lowest height is %d", *height, m.earliestBlockHeight)
+	}
+	// Return a mock block for valid heights
+	return &coretypes.ResultBlock{
+		Block: &cmttypes.Block{},
 	}, nil
 }
 
