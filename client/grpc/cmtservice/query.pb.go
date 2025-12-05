@@ -574,6 +574,10 @@ var xxx_messageInfo_GetSyncingRequest proto.InternalMessageInfo
 // GetSyncingResponse is the response type for the Query/GetSyncing RPC method.
 type GetSyncingResponse struct {
 	Syncing bool `protobuf:"varint,1,opt,name=syncing,proto3" json:"syncing,omitempty"`
+	// earliest_block_height is the earliest block height available on this node.
+	EarliestBlockHeight int64 `protobuf:"varint,2,opt,name=earliest_block_height,json=earliestBlockHeight,proto3" json:"earliest_block_height,omitempty"`
+	// latest_block_height is the latest block height available on this node.
+	LatestBlockHeight int64 `protobuf:"varint,3,opt,name=latest_block_height,json=latestBlockHeight,proto3" json:"latest_block_height,omitempty"`
 }
 
 func (m *GetSyncingResponse) Reset()         { *m = GetSyncingResponse{} }
@@ -614,6 +618,20 @@ func (m *GetSyncingResponse) GetSyncing() bool {
 		return m.Syncing
 	}
 	return false
+}
+
+func (m *GetSyncingResponse) GetEarliestBlockHeight() int64 {
+	if m != nil {
+		return m.EarliestBlockHeight
+	}
+	return 0
+}
+
+func (m *GetSyncingResponse) GetLatestBlockHeight() int64 {
+	if m != nil {
+		return m.LatestBlockHeight
+	}
+	return 0
 }
 
 // GetNodeInfoRequest is the request type for the Query/GetNodeInfo RPC method.
