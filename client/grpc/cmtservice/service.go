@@ -225,6 +225,53 @@ func (s queryServer) GetNodeInfo(ctx context.Context, _ *GetNodeInfoRequest) (*G
 	return &resp, nil
 }
 
+// GetBlockResults implements ServiceServer.GetBlockResults
+func (s queryServer) GetBlockResults(ctx context.Context, req *GetBlockResultsRequest) (*GetBlockResultsResponse, error) {
+	blockHeight, err := getBlockHeight(ctx, s.clientCtx)
+	if err != nil {
+		return nil, err
+	}
+
+	if req.Height > blockHeight {
+		return nil, status.Error(codes.InvalidArgument, "requested block height is bigger than the chain length")
+	}
+
+	return getBlockResultsResponse(ctx, s.clientCtx, &req.Height)
+}
+
+// GetLatestBlockResults implements ServiceServer.GetLatestBlockResults
+func (s queryServer) GetLatestBlockResults(ctx context.Context, _ *GetLatestBlockResultsRequest) (*GetBlockResultsResponse, error) {
+	return getBlockResultsResponse(ctx, s.clientCtx, nil)
+}
+
+func getBlockResultsResponse(ctx context.Context, clientCtx client.Context, height *int64) (*GetBlockResultsResponse, error) {
+	results, err := getBlockResults(ctx, clientCtx, height)
+	if err != nil {
+		return nil, err
+	}
+
+	// Convert FinalizeBlockEvents from []Event to []*Event
+	events := make([]*abci.Event, len(results.FinalizeBlockEvents))
+	for i := range results.FinalizeBlockEvents {
+		events[i] = &results.FinalizeBlockEvents[i]
+	}
+
+	// Convert ValidatorUpdates from []ValidatorUpdate to []*ValidatorUpdate
+	valUpdates := make([]*abci.ValidatorUpdate, len(results.ValidatorUpdates))
+	for i := range results.ValidatorUpdates {
+		valUpdates[i] = &results.ValidatorUpdates[i]
+	}
+
+	return &GetBlockResultsResponse{
+		Height:                 results.Height,
+		TxsResults:             results.TxsResults,
+		FinalizeBlockEvents:    events,
+		ValidatorUpdates:       valUpdates,
+		ConsensusParamUpdates:  results.ConsensusParamUpdates,
+		AppHash:                results.AppHash,
+	}, nil
+}
+
 func (s queryServer) ABCIQuery(ctx context.Context, req *ABCIQueryRequest) (*ABCIQueryResponse, error) {
 	if s.queryFn == nil {
 		return nil, status.Error(codes.Internal, "ABCI Query handler undefined")
