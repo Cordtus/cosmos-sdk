@@ -57,16 +57,16 @@ service Service {
     option (cosmos_proto.method_added_in) = "cosmos-sdk 0.46";
   }
 
+  // GetLatestBlockResults queries block results for the latest block.
+  rpc GetLatestBlockResults(GetLatestBlockResultsRequest) returns (GetLatestBlockResultsResponse) {
+    option (google.api.http).get          = "/cosmos/base/tendermint/v1beta1/block_results/latest";
+    option (cosmos_proto.method_added_in) = "cosmos-sdk 0.53";
+  }
+
   // GetBlockResults queries block results for a given height.
   // Returns finalize_block_events, tx results, validator updates, and consensus param updates.
   rpc GetBlockResults(GetBlockResultsRequest) returns (GetBlockResultsResponse) {
     option (google.api.http).get          = "/cosmos/base/tendermint/v1beta1/block_results/{height}";
-    option (cosmos_proto.method_added_in) = "cosmos-sdk 0.53";
-  }
-
-  // GetLatestBlockResults queries block results for the latest block.
-  rpc GetLatestBlockResults(GetLatestBlockResultsRequest) returns (GetLatestBlockResultsResponse) {
-    option (google.api.http).get          = "/cosmos/base/tendermint/v1beta1/block_results/latest";
     option (cosmos_proto.method_added_in) = "cosmos-sdk 0.53";
   }
 }
